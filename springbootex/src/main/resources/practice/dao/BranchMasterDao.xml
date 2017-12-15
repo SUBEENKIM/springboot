@@ -27,7 +27,7 @@
   </select>
   
   <select id="selectOneByEmailPassword" resultMap="branchMasterMap" parameterType="map">
-    select  bmno, bmname, bmtel, bmemail, bmpwd, bmfbid, bmgrade
+    select  bmno, bmname, bmtel, bmemail, bmgrade
     from branch_master
     where bmemail=#{email} and bmpwd=password(#{password})
   </select>

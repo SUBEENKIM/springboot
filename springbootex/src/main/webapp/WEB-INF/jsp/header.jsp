@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class='header'>
   <div id='logo'>비트캠프</div>
-<c:if test="${loginMember != null}">
+<c:if test="${loginBranchMaster != null}">
   <div id='login'>
-    ${loginMember.name}(${loginMember.email})
+    ${loginBranchMaster.name}(${loginBranchMaster.email})
     <a href='${pageContext.request.contextPath}/auth/logout.do'>로그아웃</a>
   </div>
 </c:if>

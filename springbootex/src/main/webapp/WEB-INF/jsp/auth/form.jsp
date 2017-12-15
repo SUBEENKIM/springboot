@@ -12,6 +12,10 @@
 <jsp:include page="../header.jsp"></jsp:include>
 <h1>회원 로그인</h1>
 <form action='login.do' method='POST'>
+<p>
+<input type="radio" name="userType" value="manager" > 관리자
+<input type="radio" name="userType" value="branchMaster" checked  > 점주
+</p>
 <p>이메일: <input type='text' name='email' value='${cookie.email.value}'></p>
 <p>암호: <input type='password' name='password'></p>
 <input type='checkbox' name='saveEmail'> 이메일 저장
