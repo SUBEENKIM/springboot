@@ -2,7 +2,7 @@ create database if not exists digitalmenudb default character set utf8 collate u
 
 create user 'menu'@'localhost' identified by '1111';
 
-grant all privileges on digitalmenudb.* to 'userid'@'localhost';
+grant all privileges on digitalmenudb.* to 'menu'@'localhost';
 
 use digitalmenudb;
 
