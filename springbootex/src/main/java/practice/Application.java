@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("practice.dao") // DAO 인터페이스로부터 클래스 자동 생성
 public class Application {
 
+	
   @Bean 
   @ConfigurationProperties("app.datasource")
   public DataSource dataSource() {
