@@ -32,7 +32,7 @@ public class AuthControl {
       branchMaster = branchMasterService.getByEmailPassword(email, password);
     }
     
-    if (branchMaster != null) { 
+    if (branchMaster != null) { // 현재 상태 : 아이디는 저장되지만 로그인할때마다 기억하기 체크박스 눌러줘야 다음 로그인때 저장됨.
       HttpSession session = req.getSession();
       session.setAttribute("loginBranchMaster", branchMaster);
       String saveEmail = req.getParameter("saveEmail");
@@ -56,7 +56,7 @@ public class AuthControl {
   @RequestMapping("logout")
   public String logout(HttpServletRequest req, HttpServletResponse res) throws Exception {
     req.getSession().invalidate();  
-    return "redirect:../auth/login.do";
+    return "redirect:../auth/form.do";
   }  
 }
 
