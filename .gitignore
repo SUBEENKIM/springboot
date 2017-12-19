@@ -10,4 +10,6 @@
 **/Debug
 **/Release
 **/.settings/
+**/.jks
+**/.cer
 !build.gradle
