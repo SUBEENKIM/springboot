@@ -13,4 +13,5 @@
 keystore.jks
 cacerts.jks
 server.cer
+www_subeenk_xyz.p12
 !build.gradle
