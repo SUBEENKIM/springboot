@@ -5,7 +5,7 @@
 
 <html lang="ko">
 <head>
-<title>Elements - Urban by TEMPLATED</title>
+<title>Bigdata3</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -17,25 +17,10 @@
 <body class="subpage">
 
 	<!-- Header -->
-	<header id="header">
-		<div class="logo">
-			<a href="index.html">Donny <span>by TEMPLATED</span></a>
-		</div>
-		<a href="#menu">Menu</a>
-	</header>
+	<jsp:include page="../header.jsp"></jsp:include>
 
 	<!-- Nav -->
-	<nav id="menu">
-		<ul class="links">
-			<li><a href="index.html">메인</a></li>
-			<li><a href="generic.html">내용1</a></li>
-			<li><a href="elements.html">튜토리얼</a></li>
-			<li><a href="loginmain.html">로그인</a></li>
-			<li><a href="menu_info.html">메뉴소개</a></li>
-			<li><a href="noticeboard.html">게시판</a></li>
-			<li><a href="adminmain.html">Admin Only</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="../navi.jsp"></jsp:include>
 
 	<!-- Main -->
 	<div id="main">
@@ -212,12 +197,12 @@
 	</script>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/jquery.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/jquery.scrolly.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/jquery.scrollex.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/skel.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/util.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/assets/js/main.js"></script>
 
 </body>
 </html>

@@ -21,6 +21,9 @@ public class AuthControl {
   @RequestMapping("form")
   public void form() {}
   
+  @RequestMapping("index")
+  public void index() {}
+  
   @RequestMapping("login")
   public String login(HttpServletRequest req, HttpServletResponse resp) throws Exception {
     String userType = req.getParameter("userType");
@@ -46,7 +49,7 @@ public class AuthControl {
         resp.addCookie(cookie2);
       }
       
-      return "redirect:../branchMaster/list.do";
+      return "redirect:../auth/index";
       
     } else {
       return "auth/fail";
@@ -56,8 +59,17 @@ public class AuthControl {
   @RequestMapping("logout")
   public String logout(HttpServletRequest req, HttpServletResponse res) throws Exception {
     req.getSession().invalidate();  
-    return "redirect:../auth/form.do";
-  }  
+    return "redirect:../auth/form";
+  }
+  
+  @RequestMapping("add")
+  public String add(
+      BranchMaster branchMaster) throws Exception {
+    
+    branchMasterService.add(branchMaster);
+    return "redirect:../auth/signup";
+  }
+  
 }
 
 
