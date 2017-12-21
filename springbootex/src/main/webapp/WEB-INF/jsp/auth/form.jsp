@@ -74,7 +74,7 @@
 									</div>
 									<div class="12u$">
 										<ul class="actions">
-											<li><a href="#" class="button icon fa-download">Create
+											<li><a href="./signup" class="button icon fa-download">Create
 													New Account</a></li>
 										</ul>
 									</div>

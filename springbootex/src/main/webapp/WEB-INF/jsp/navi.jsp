@@ -18,11 +18,12 @@
 				</c:choose> </a></li>
 
 			<li><a href="index.html">메인</a></li>
-			<li><a href="generic.html">내용1</a></li>
-			<li><a href="elements.html">튜토리얼</a></li>
-			<li><a href="menu_info.html">메뉴소개</a></li>
-			<li><a href="noticeboard.html">게시판</a></li>
-			<li><a href="adminmain.html">Admin Only</a></li>
+			<li><a href='mypage.do?no=${loginBranchMaster.no}'>마이페이지</a></li>
+			<li><a href="#">매장환경관리</a></li>
+			<li><a href="#">매장메뉴관리</a></li>
+			<li><a href="#">빅데이터</a></li>
+			<li><a href="#">게시판</a></li>
+			<li><a href="#">Admin Only</a></li>
 		</ul>
 	</nav>
 </div>

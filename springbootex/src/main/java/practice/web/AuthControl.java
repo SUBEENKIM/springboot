@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import practice.domain.BranchMaster;
@@ -62,12 +63,34 @@ public class AuthControl {
     return "redirect:../auth/form";
   }
   
+  @RequestMapping("mypage")
+  public String mypage(int no, Model model) throws Exception{
+	  BranchMaster branchMaster = branchMasterService.get(no);
+	    if (branchMaster == null) {
+	      throw new Exception(no + "번 회원이 없습니다.");
+	    }
+	    model.addAttribute("branchMaster", branchMaster);
+	    return "auth/mypage";
+	  
+  }
+  
+  @RequestMapping("signup")
+  public void signup() {}
+  
   @RequestMapping("add")
   public String add(
       BranchMaster branchMaster) throws Exception {
     
     branchMasterService.add(branchMaster);
     return "redirect:../auth/signup";
+  }
+  
+  @RequestMapping("update")
+  public String update(
+      BranchMaster branchMaster) throws Exception {
+    
+    branchMasterService.update(branchMaster);
+    return "/auth/mypage";
   }
   
 }

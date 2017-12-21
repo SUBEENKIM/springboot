@@ -21,7 +21,7 @@
   </select>
   
   <select id="selectOne" resultMap="branchMasterMap" parameterType="int">
-    select  bmno, bmemail, bmname, bmtel, bmgrade, bmfbid
+    select  bmemail, bmname, bmtel
     from branch_master
     where bmno = #{branchmasterNo}
   </select>
@@ -33,8 +33,8 @@
   </select>
   
   <insert id="insert" parameterType="branchMaster">
-    insert into branch_master(bmno, bmname, bmtel, bmemail, bmpwd, bmfbid, bmgrade) 
-    values(#{no}, #{name}, #{tel}, #{email}, password(#{password}), #{facebook}, #{grade})
+    insert into branch_master(bmemail, bmpwd) 
+    values(#{email}, password(#{password}))
   </insert>
   
   <delete id="delete" parameterType="int">
@@ -43,14 +43,10 @@
   
   <update id="update" parameterType="branchMaster">
     update branch_master set 
-      bmno = #{no}, 
       bmname = #{name}, 
       bmtel = #{tel},
-      bmemail = #{email},
-      bmpwd = password(#{password},
-      bmfbid = #{facebook},
-      bmgrade = #{grade}
-    where bmno=#{no}
+      bmemail = #{email}
+    where bmemail=#{email}
   </update>
 
 </mapper>
