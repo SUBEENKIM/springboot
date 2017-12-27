@@ -24,34 +24,43 @@ alter table branch_master modify column bmno int not null auto_increment;
 
 alter table branch_master add unique key(bmemail);
 
+alter table branch_master modify column bmgrade varchar(50) DEFAULT 'branch_master';
+
 desc branch_master;
 
 insert into branch_master(bmno, bmemail, bmpwd, bmname, bmtel, bmfbid, bmgrade) values(1, 'a1@test.com', password('1111'), 'hong1', '111-1111', 'a1@test.com', 'branch_master');
 insert into branch_master(bmno, bmemail, bmpwd, bmname, bmtel, bmfbid, bmgrade) values(2, 'a2@test.com', password('1111'), 'hong2', '222-2222', 'a2@test.com', 'branch_master');
 insert into branch_master(bmno, bmemail, bmpwd, bmname, bmtel, bmfbid, bmgrade) values(3, 'a3@test.com', password('1111'), 'hong3', '333-3333', 'a3@test.com', 'pre_master');
 
+-- Branch
 
--- Auth
-
-create table auth(
-  mno int not null,
-  memail varchar(50) not null,
-  mpwd varchar(200),
-  mname varchar(50),
-  mtel varchar(50),
-  mgrade varchar(50),
-  mbirth varchar(50),
-  mdtm varchar(50)
+create table branch(
+  bno int primary key not null,
+  bname varchar(50),
+  btel varchar(50),
+  baddr varchar(50),
+  barea varchar(50),
+  bimage varchar(200),
+  bintro varchar(200),
+  blilg varchar(50),
+  bmno int,
+  constraint fk_bmno foreign key(bmno) references branch_master(bmno) on update cascade
 );
 
-alter table auth add primary key(mno);
+alter table branch modify column bno int not null auto_increment;
 
-alter table auth modify column mno int not null auto_increment;
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(1, '강남 중앙점', '111-1111', '서울특별시 강남구 서초동', '서울특별시 강남구', '안녕하세요', '38,33',19);
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(2, '시흥 목감점', '222-2222', '경기도 시흥시 목감동', '경기도 시흥시', 'ㅎㅇㅎㅇ', '32,33',20);
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(3, '안산 부곡점', '333-3333', '경기도 안산시 부곡동', '경기도 안산시', 'hello', '31,33',21);
 
-alter table auth add unique key(memail);
+	
+select  b.bno, b.bname, b.btel, bm.bmno, bm.bmname
+from branch b left join branch_master bm
+on b.bmno=bm.bmno;
 
-desc auth;
-
-insert into auth(mno, memail, mpwd, mname, mtel, mgrade, mbirth) values(1, 'a1@test.com', password('1111'), 'hong1', '111-1111', 'branch_master', '1991-01-01');
-insert into auth(mno, memail, mpwd, mname, mtel, mgrade, mbirth) values(2, 'a2@test.com', password('1111'), 'hong2', '222-2222', 'branch_master', '1991-01-01');
-insert into auth(mno, memail, mpwd, mname, mtel, mgrade, mbirth) values(3, 'a3@test.com', password('1111'), 'hong3', '333-3333', 'pre_master', '1991-01-01');
+create table branch_phot(
+bpno int primary key not null auto_increment,
+bno int,
+constraint fk_bno foreign key(bno) references branch(bno),
+path varchar(255)
+);

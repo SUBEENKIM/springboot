@@ -82,7 +82,7 @@ public class AuthControl {
       BranchMaster branchMaster) throws Exception {
     
     branchMasterService.add(branchMaster);
-    return "redirect:../auth/signup";
+    return "../auth/form";
   }
   
   @RequestMapping("update")

@@ -9,10 +9,40 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath}/assets/css/main.css" />
 <!-- Favicon and touch icons -->
 <link rel="icon"
 	href="${pageContext.servletContext.contextPath}/ico/home_iot.png">
+<style>
+		.pb-modalreglog-input-group {
+			margin: auto;
+		}
+
+		.pb-modalreglog-submit {
+			margin-left: 5px;
+		}
+
+		.pb-modalreglog-form-reg {
+			text-align: center;
+		}
+
+		.pb-modalreglog-footer p {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		@media (min-width: 768px) .modal-sm {
+			width: 400px;
+		}
+
+		@media (min-width: 768px) .modal-dialog {
+			margin: 80px auto;
+		}
+	</style>
 </head>
 <body class="subpage">
 
@@ -21,6 +51,10 @@
 
 	<!-- Nav -->
 	<jsp:include page="../navi.jsp"></jsp:include>
+
+	<!-- Modal -->
+	<jsp:include page="../modal.jsp"></jsp:include>
+
 
 	<!-- Main -->
 	<div id="main">
@@ -44,20 +78,21 @@
 
 							<div class="4u 12u$(small)">
 								<input type="radio" id="priority-low" name="userType"
-									value="manager" checked> <label for="priority-low">관리자</label>
+									value="manager"> <label for="priority-low">관리자</label>
 							</div>
 							<div class="4u 12u$(small)">
 								<input type="radio" id="priority-normal" name="userType"
-									value="branchMaster"> <label for="priority-normal">점주</label>
+									value="branchMaster" checked> <label
+									for="priority-normal">점주</label>
 							</div>
 							<form method="post" action="#">
 								<div class="row uniform">
 									<div class="10u$">
 										<i class="fa fa-key"></i> <input type="email" name="email"
-											id="email" value='${cookie.email.value}' placeholder="Email" />
+											value='${cookie.email.value}' placeholder="Email" />
 									</div>
 									<div class="10u$">
-										<input type="password" name="password" id="password" value=""
+										<input type="password" name="password" value=""
 											placeholder="password" />
 									</div>
 									<!-- checkbox -->
@@ -72,14 +107,16 @@
 													Password</a></li>
 										</ul>
 									</div>
-									<div class="12u$">
-										<ul class="actions">
-											<li><a href="./signup" class="button icon fa-download">Create
-													New Account</a></li>
-										</ul>
-									</div>
 								</div>
 							</form>
+						</form>
+						<div class="12u$">
+							<ul class="actions">
+								<li><a href="#" class="button icon fa-download"
+									data-toggle="modal" data-target="#myModal2">Create New
+										Account</a></li>
+							</ul>
+						</div>
 					</div>
 
 					<div class="6u 12u$(medium)">
@@ -106,7 +143,11 @@
 
 	<!-- Scripts -->
 	<script
+		src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script>
+	<script
 		src="${pageContext.servletContext.contextPath}/assets/js/jquery.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.servletContext.contextPath}/assets/js/jquery.scrolly.min.js"></script>
 	<script

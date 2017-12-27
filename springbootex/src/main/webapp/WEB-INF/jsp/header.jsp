@@ -4,7 +4,7 @@
 <div class='header'>
 	<header id="header">
 		<div class="logo">
-			<a href="index.html">Donny <span>by TEMPLATED</span></a>
+			<a href="index.html">BIGDATA3 <span>by TEMPLATED</span></a>
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
