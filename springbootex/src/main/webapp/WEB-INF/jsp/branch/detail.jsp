@@ -15,11 +15,6 @@
 	href="${pageContext.servletContext.contextPath}/ico/home_iot.png">
 </head>
 <body>
-
-	<!-- Nav -->
-	<jsp:include page="../navi.jsp"></jsp:include>
-
-<h1> </h1>
 <h1>지점 정보</h1>
 <form action='update.do' method='POST' enctype='multipart/form-data'>
 번호:<input type='text' name='no' value='${branch.no}' readonly><br>

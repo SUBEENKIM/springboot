@@ -15,10 +15,6 @@
 </head>
 <body>
 
-	<!-- Nav -->
-	<jsp:include page="../navi.jsp"></jsp:include>
-
-<h1></h1>
 <h1>지점 등록</h1>
 <form action="add.do" method="POST" enctype="multipart/form-data">
 이름:<input type='text' name='name' ><br>

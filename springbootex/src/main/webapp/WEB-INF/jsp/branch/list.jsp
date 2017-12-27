@@ -15,11 +15,6 @@
 	href="${pageContext.servletContext.contextPath}/ico/home_iot.png">
 </head>
 <body>
-
-	<!-- Nav -->
-	<jsp:include page="../navi.jsp"></jsp:include>
-
-<h1> </h1>
 <a href='form.html'>새지점 추가</a>
 <table border='1'>
 <thead>

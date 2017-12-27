@@ -28,7 +28,7 @@ public class BranchControl {
 	FileUploadService fileUploadService;
 
 	@RequestMapping("list")
-	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "5") int pageSize,
+	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize,
 			Model model) throws Exception {
 
 		List<Branch> list = branchService.list(pageNo, pageSize);
@@ -51,17 +51,6 @@ public class BranchControl {
 		return "redirect:list.do";
 	}
 
-	@RequestMapping("detail")
-	public String detail(int no, Model model) throws Exception {
-		Branch branch = branchService.get(no);
-		if (branch == null) {
-			throw new Exception(no + "번 회원이 없습니다.");
-		}
-		model.addAttribute("branch", branch);
-		return "branch/detail";
-
-	}
-	
 	@RequestMapping("update")
 	  public String update(
 	      Branch branch, 
@@ -77,6 +66,18 @@ public class BranchControl {
 	    branchService.update(branch);
 	    return "redirect:list.do";
 	  }
+
+	@RequestMapping("detail")
+	public String detail(int no, Model model) throws Exception {
+		Branch branch = branchService.get(no);
+		if (branch == null) {
+			throw new Exception(no + "번 회원이 없습니다.");
+		}
+		model.addAttribute("branch", branch);
+		return "branch/detail";
+		
+	}
+	
 	
 	  @RequestMapping("delete")
 	  public String delete(int no) throws Exception {

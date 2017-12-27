@@ -35,7 +35,7 @@
   </select>
   
   
-  <insert id="insert" parameterType="branch">
+  <insert id="insert" parameterType="branch" useGeneratedKeys="true" keyColumn="bno" keyProperty="no">
     insert into branch(bname, btel, baddr, barea, blilg, bmno, bintro) 
     values(#{name}, #{tel}, #{addr}, #{area}, #{lilg}, #{bmno}, #{intro})
   </insert>
