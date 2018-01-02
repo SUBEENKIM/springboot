@@ -12,6 +12,9 @@
     <result column="bmtel" property="tel"/>
     <result column="bmfbid" property="facebook"/>
     <result column="bmgrade" property="grade"/>
+    <result column="bname" property="bname"/>
+    <result column="bno" property="bno"/>
+    <result column="btel" property="btel"/>
   </resultMap>
 
   <select id="selectList" resultMap="branchMasterMap" parameterType="map">
@@ -21,9 +24,9 @@
   </select>
   
   <select id="selectOne" resultMap="branchMasterMap" parameterType="int">
-    select  bmemail, bmname, bmtel
-    from branch_master
-    where bmno = #{branchmasterNo}
+    select  bm.bmemail, bm.bmname, bm.bmtel, b.bname, b.bno, b.btel
+    from branch_master bm left join branch b on b.bmno=bm.bmno
+    where bm.bmno = #{branchmasterNo}
   </select>
   
   <select id="selectOneByEmailPassword" resultMap="branchMasterMap" parameterType="map">

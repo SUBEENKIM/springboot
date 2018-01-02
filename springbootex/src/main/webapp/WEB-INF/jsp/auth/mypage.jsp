@@ -82,19 +82,19 @@
 													<h4>매장명</h4>
 												</div>
 												<div class="5u$ 12u$(xsmall)">
-													<input type="text" name="store" id="store" value="" placeholder="등록매장명" />
+													<input type="text" name="store" id="store" value="${branchMaster.bname}" placeholder="등록매장명" />
 												</div>
 												<div class="2u 12u$(xsmall)">
 													<h4>매장넘버</h4>
 												</div>
 												<div class="5u$ 12u$(xsmall)">
-													<input type="text" name="store_no" id="store_no" value="" placeholder="등록매장넘버" />
+													<input type="text" name="store_no" id="store_no" value="${branchMaster.bno}" placeholder="등록매장넘버" />
 												</div>
 												<div class="2u 12u$(xsmall)">
 													<h4>매장연락처</h4>
 												</div>
 												<div class="5u$ 12u$(xsmall)">
-													<input type="text" name="s_tel" id="s_tel" value="" placeholder="매장전화번호" />
+													<input type="text" name="s_tel" id="s_tel" value="${branchMaster.btel}" placeholder="매장전화번호" />
 												</div>
 												
 												<div class="3u 12u$(xsmall)">

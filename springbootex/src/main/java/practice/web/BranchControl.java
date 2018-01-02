@@ -27,14 +27,14 @@ public class BranchControl {
 	@Autowired
 	FileUploadService fileUploadService;
 
-	@RequestMapping("list")
+	@RequestMapping("list2")
 	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize,
 			Model model) throws Exception {
 
 		List<Branch> list = branchService.list(pageNo, pageSize);
 		model.addAttribute("list", list);
 
-		return "branch/list";
+		return "branch/list2";
 	}
 
 	@RequestMapping("add")
@@ -48,7 +48,7 @@ public class BranchControl {
 		}
 		branch.setPhotoList(photoList);
 		branchService.add(branch);
-		return "redirect:list.do";
+		return "redirect:list2.do";
 	}
 
 	@RequestMapping("update")

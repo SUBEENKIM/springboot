@@ -1,10 +1,13 @@
 -- BranchMaster
 
 create database if not exists digitalmenudb default character set utf8 collate utf8_general_ci;
+create database if not exists big3 default character set utf8 collate utf8_general_ci;
 
 create user 'menu'@'localhost' identified by '1111';
+create user 'big3'@'localhost' identified by '1111';
 
 grant all privileges on digitalmenudb.* to 'menu'@'localhost';
+grant all privileges on big3.* to 'big3'@'localhost';
 
 use digitalmenudb;
 
@@ -35,7 +38,7 @@ insert into branch_master(bmno, bmemail, bmpwd, bmname, bmtel, bmfbid, bmgrade) 
 -- Branch
 
 create table branch(
-  bno int primary key not null,
+  bno int,
   bname varchar(50),
   btel varchar(50),
   baddr varchar(50),
@@ -43,24 +46,30 @@ create table branch(
   bimage varchar(200),
   bintro varchar(200),
   blilg varchar(50),
-  bmno int,
-  constraint fk_bmno foreign key(bmno) references branch_master(bmno) on update cascade
+  bmno int
 );
+
+alter table branch add primary key(bno);
 
 alter table branch modify column bno int not null auto_increment;
 
-insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(1, '강남 중앙점', '111-1111', '서울특별시 강남구 서초동', '서울특별시 강남구', '안녕하세요', '38,33',19);
-insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(2, '시흥 목감점', '222-2222', '경기도 시흥시 목감동', '경기도 시흥시', 'ㅎㅇㅎㅇ', '32,33',20);
-insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(3, '안산 부곡점', '333-3333', '경기도 안산시 부곡동', '경기도 안산시', 'hello', '31,33',21);
+alter table branch add constraint fk_bmno foreign key(bmno) references branch_master(bmno);
 
-	
-select  b.bno, b.bname, b.btel, bm.bmno, bm.bmname
-from branch b left join branch_master bm
-on b.bmno=bm.bmno;
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(1, '강남 중앙점', '111-1111', '서울특별시 강남구 서초동', '서울특별시 강남구', '안녕하세요', '38,33',1);
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(2, '시흥 목감점', '222-2222', '경기도 시흥시 목감동', '경기도 시흥시', 'ㅎㅇㅎㅇ', '32,33',2);
+insert into branch(bno, bname, btel, baddr, barea, bintro, blilg, bmno) values(3, '안산 부곡점', '333-3333', '경기도 안산시 부곡동', '경기도 안산시', 'hello', '31,33',3);
+
 
 create table branch_phot(
-bpno int primary key not null auto_increment,
-bno int,
-constraint fk_bno foreign key(bno) references branch(bno),
-path varchar(255)
+	bpno int ,
+	bno int,
+	path varchar(255)
 );
+
+alter table branch_phot add primary key(bpno);
+
+alter table branch_phot modify column bpno int not null auto_increment;
+
+alter table branch_phot add constraint fk_bno foreign key(bno) references branch(bno);
+
+

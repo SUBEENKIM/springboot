@@ -8,12 +8,17 @@ public class BranchMaster {
 	String tel;
 	String facebook;
 	String grade;
+	String bname;
+	int bno;
+	String btel;
 	
 	
+
 	@Override
 	public String toString() {
 		return "BranchMaster [no=" + no + ", email=" + email + ", password=" + password + ", name=" + name + ", tel="
-				+ tel + ", facebook=" + facebook + ", grade=" + grade + "]";
+				+ tel + ", facebook=" + facebook + ", grade=" + grade + ", bname=" + bname + ", bno=" + bno + ", btel="
+				+ btel + "]";
 	}
 	
 	public int getNo() {
@@ -72,6 +77,29 @@ public class BranchMaster {
 		this.grade = grade;
 	}
 	
+	public String getBname() {
+		return bname;
+	}
+	
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+	
+	public int getBno() {
+		return bno;
+	}
+	
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	
+	public String getBtel() {
+		return btel;
+	}
+	
+	public void setBtel(String btel) {
+		this.btel = btel;
+	}
 	
 
 }
