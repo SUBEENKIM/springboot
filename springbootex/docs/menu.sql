@@ -1,5 +1,3 @@
--- BranchMaster
-
 create database if not exists digitalmenudb default character set utf8 collate utf8_general_ci;
 create database if not exists big3 default character set utf8 collate utf8_general_ci;
 
@@ -11,6 +9,7 @@ grant all privileges on big3.* to 'big3'@'localhost';
 
 use digitalmenudb;
 
+-- BranchMaster
 create table branch_master(
   bmno int not null,
   bmemail varchar(50) not null,

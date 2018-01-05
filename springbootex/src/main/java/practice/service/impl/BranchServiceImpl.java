@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import practice.dao.BranchDao;
+import practice.dao.FileDao;
 import practice.domain.Branch;
+import practice.domain.Upload;
 import practice.service.BranchService; 
 
 @Service
@@ -15,6 +17,8 @@ class BranchServiceImpl implements BranchService{
 
 	@Autowired
 	BranchDao branchDao;
+	@Autowired
+	FileDao fileDao;
 	
 	public List<Branch> list(int pageNo, int pageSize) throws Exception{
 		HashMap<String, Object> valueMap = new HashMap<>();
@@ -32,7 +36,16 @@ class BranchServiceImpl implements BranchService{
 	  
 	public void add(Branch branch) throws Exception{
 		branchDao.insert(branch);
-		this.insertPhoto(branch.getNo(), branch.getPhotoList()); // 지점 사진 추가
+		
+		List<Upload> uploadList =branch.getUploadList();
+		for (Upload upload:uploadList) {
+			
+			upload.setBranchNo(branch.getNo());
+			
+			fileDao.insert(upload);
+		}
+		
+		//this.insertPhoto(branch.getNo(), branch.getPhotoList()); // 지점 사진 추가
 	}
 	  
 	public void update(Branch branch) throws Exception {
@@ -43,23 +56,30 @@ class BranchServiceImpl implements BranchService{
 	    }
 	    
 	    // 지점 사진 갱신
-	    branchDao.deletePhoto(branch.getNo()); // 지점의 모든 사진을 지운다.
-	    this.insertPhoto(branch.getNo(), branch.getPhotoList()); // 지점 사진 추가
+	    fileDao.delete(branch.getNo()); // 지점의 모든 사진을 지운다.
+	    
+	    List<Upload> uploadList =branch.getUploadList();
+		for (Upload upload:uploadList) {
+			
+			upload.setBranchNo(branch.getNo());
+			
+			fileDao.insert(upload);
+		} // 지점 사진 추가
 	  
 	  }
 	
-	private void insertPhoto(int branchNo, List<String> photoPathList) {
-	    HashMap<String,Object> valueMap = new HashMap<>();
-	    valueMap.put("branchNo", branchNo);
-	    
-	    for (String photoPath : photoPathList) {
-	      valueMap.put("photoPath", photoPath);
-	      branchDao.insertPhoto(valueMap);
-	    }
-	  }
-	  
+//	private void insertPhoto(int branchNo, List<String> photoPathList) {
+//	    HashMap<String,Object> valueMap = new HashMap<>();
+//	    valueMap.put("branchNo", branchNo);
+//	    
+//	    for (String photoPath : photoPathList) {
+//	      valueMap.put("photoPath", photoPath);
+//	      branchDao.insertPhoto(valueMap);
+//	    }
+//	  }
+//	  
 	public void remove(int no) throws Exception{
-		branchDao.deletePhoto(no);
+		fileDao.delete(no);
 	    int count = branchDao.delete(no);
 	    if (count < 1) {
 	      throw new Exception(no + "번 지점을 찾을 수 없습니다.");

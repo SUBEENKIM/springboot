@@ -81,9 +81,11 @@
 												<div class="2u 12u$(xsmall)">
 													<h4>매장명</h4>
 												</div>
+												
 												<div class="5u$ 12u$(xsmall)">
 													<input type="text" name="store" id="store" value="${branchMaster.bname}" placeholder="등록매장명" />
 												</div>
+												
 												<div class="2u 12u$(xsmall)">
 													<h4>매장넘버</h4>
 												</div>

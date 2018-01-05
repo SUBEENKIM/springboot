@@ -10,12 +10,23 @@ public class Upload {
 	private Date uploadDate;
 	private Date updateDate;
 	private boolean delCheck;
+	private int branchNo;
+	
+
 
 	@Override
 	public String toString() {
 		return "Upload [uploadNo=" + uploadNo + ", fileName=" + fileName + ", newFileName=" + newFileName
 				+ ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", updateDate=" + updateDate + ", delCheck="
-				+ delCheck + "]";
+				+ delCheck + ", branchNo=" + branchNo + "]";
+	}
+
+	public int getBranchNo() {
+		return branchNo;
+	}
+	
+	public void setBranchNo(int branchNo) {
+		this.branchNo = branchNo;
 	}
 
 	public int getUploadNo() {

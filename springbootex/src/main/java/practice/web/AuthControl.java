@@ -77,6 +77,7 @@ public class AuthControl {
 			throw new Exception(no + "번 회원이 없습니다.");
 		}
 		model.addAttribute("branchMaster", branchMaster);
+		model.addAttribute("branch", branch);
 		return "auth/mypage";
 
 	}
@@ -89,7 +90,7 @@ public class AuthControl {
 	public String add(BranchMaster branchMaster) throws Exception {
 
 		branchMasterService.add(branchMaster);
-		return "../auth/form";
+		return "/auth/form";
 	}
 
 	@RequestMapping("update")

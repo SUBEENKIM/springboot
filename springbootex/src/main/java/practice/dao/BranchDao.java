@@ -11,8 +11,8 @@ public interface BranchDao {
 	int insert(Branch branch); // Branch 정보 추가
 	int delete(int no); // Branch 정보 삭제
 	int update(Branch branch); // Branch 정보 수정
-	void insertPhoto(Map<String,Object> valueMap); // Branch 사진 정보 추가
-	List<String> selectPhotoList(int branchNo); // Branch 사진 정보 보기
-	void deletePhoto(int branchNo); // Branch 사진 정보 삭제
+//	void insertPhoto(Map<String,Object> valueMap); // Branch 사진 정보 추가
+//	List<String> selectPhotoList(int branchNo); // Branch 사진 정보 보기
+//	void deletePhoto(int branchNo); // Branch 사진 정보 삭제
 
 }

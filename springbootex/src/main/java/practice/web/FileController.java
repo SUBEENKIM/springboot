@@ -17,7 +17,7 @@ import practice.utils.FileSystem;
 @Controller
 @RequestMapping("/file")
 public class FileController {
-
+/*
   @Autowired
   UploadService uploadService;
 
@@ -26,19 +26,19 @@ public class FileController {
     return "test/filetest";
   }
 
-//  @RequestMapping("insert")
-//  public void insert(MultipartFile[] file) throws Exception {
-//    Upload upload = new Upload();
-//    FileSystem fileSystem = new FileSystem();
-//    if (file != null) {
-//      String fileName = file.getOriginalFilename();
-//      String newFileName = fileSystem.newFileName();
-//      upload.setFileName(fileName);
-//      upload.setNewFileName(newFileName);
-//      uploadService.insert(upload);
-//      uploadService.fileUpload(file, newFileName);
-//    }
-//  }
+  @RequestMapping("insert")
+  public void insert(MultipartFile file) throws Exception {
+    Upload upload = new Upload();
+    FileSystem fileSystem = new FileSystem();
+    if (file != null) {
+      String fileName = file.getOriginalFilename();
+      String newFileName = fileSystem.newFileName();
+      upload.setFileName(fileName);
+      upload.setNewFileName(newFileName);
+      uploadService.insert(upload);
+      uploadService.fileUpload(file, newFileName);
+    }
+  }
 
   @RequestMapping("/download/{filename}")
   public ResponseEntity<Resource> download(@PathVariable String fileName) throws Exception {
@@ -49,5 +49,5 @@ public class FileController {
     bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION, "attachment: filename=\"" + fileName + "\"");
 
     return bodyBuilder.body(file);
-  }
+  }*/
 }

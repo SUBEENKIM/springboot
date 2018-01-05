@@ -7,21 +7,21 @@ public class Branch {
 	String name;
 	String addr;
 	String tel;
-	String image;
 	String intro;
 	String area;
-	String lilg;
 	int bmno;
 	String bmname;
 	List<String> photoList;
-
+	List<Upload> uploadList;
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Branch [no=" + no + ", name=" + name + ", addr=" + addr + ", tel=" + tel + ", image=" + image
-				+ ", intro=" + intro + ", area=" + area + ", lilg=" + lilg + ", bmno=" + bmno + ", bmname=" + bmname
-				+ ", photoList=" + photoList + "]";
+		return "Branch [no=" + no + ", name=" + name + ", addr=" + addr + ", tel=" + tel + ", intro=" + intro
+				+ ", area=" + area + ", bmno=" + bmno + ", bmname=" + bmname + ", photoList=" + photoList
+				+ ", uploadList=" + uploadList + "]";
 	}
-	
 	
 	public int getNo() {
 		return no;
@@ -47,35 +47,17 @@ public class Branch {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	public String getIntro() {
 		return intro;
 	}
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	public List<String> getPhotoList() {
-		return photoList;
-	}
-	public void setPhotoList(List<String> photoList) {
-		this.photoList = photoList;
-	}
 	public String getArea() {
 		return area;
 	}
 	public void setArea(String area) {
 		this.area = area;
-	}
-	public String getLilg() {
-		return lilg;
-	}
-	public void setLilg(String lilg) {
-		this.lilg = lilg;
 	}
 	public int getBmno() {
 		return bmno;
@@ -89,5 +71,21 @@ public class Branch {
 	public void setBmname(String bmname) {
 		this.bmname = bmname;
 	}
+	public List<String> getPhotoList() {
+		return photoList;
+	}
+	public void setPhotoList(List<String> photoList) {
+		this.photoList = photoList;
+	}
+	public List<Upload> getUploadList() {
+		return uploadList;
+	}
+	public void setUploadList(List<Upload> uploadList) {
+		this.uploadList = uploadList;
+	}
+	
+	
+	
+	
 	
 }

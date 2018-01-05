@@ -4,21 +4,14 @@ DROP TABLE IF EXISTS branch_master;
 DROP TABLE IF EXISTS board;
 DROP TABLE IF EXISTS reply;
 DROP TABLE IF EXISTS board_mgr;
-DROP TABLE IF EXISTS file_mgr;
+DROP TABLE IF EXISTS menu_mgr;
+DROP TABLE IF EXISTS branch_file;
 DROP TABLE IF EXISTS branch;
 DROP TABLE IF EXISTS menu;
-
-
--- AUTH 중계 테이블
-CREATE TABLE 'auth_mgr'(
-    'amno' INT(11) NOT NULL COMMENT 'amno', --amno
-    'atype' VARCHAR(20) NOT NULL 'atype' --atype
-);
 
 -- 관리자 테이블
 CREATE TABLE `admin` (
 	`adno`    INT(11)      NULL     COMMENT 'adno', -- adno
-    `typeno`  INT(11)      NULL     COMMENT 'typeno', -- typeno
 	`admail`  VARCHAR(30)  NOT NULL COMMENT 'admail', -- admail
 	`adpwd`   VARCHAR(200) NOT NULL COMMENT 'adpwd', -- adpwd
 	`adname`  VARCHAR(30)  NOT NULL COMMENT 'adname', -- adname
@@ -30,7 +23,6 @@ COMMENT 'admin';
 -- 점주 테이블
 CREATE TABLE `branch_master` (
 	`bmno`    INT(11)      NULL     COMMENT 'bmno', -- bmno
-    `typeno`  INT(11)      NULL     COMMENT 'typeno', -- typeno
 	`bmemail` VARCHAR(40)  NOT NULL COMMENT 'bmemail', -- bmemail
 	`bmpwd`   VARCHAR(100) NOT NULL COMMENT 'bmpwd', -- bmpwd
 	`bmname`  VARCHAR(40)  NOT NULL COMMENT 'bmname', -- bmname
@@ -61,7 +53,6 @@ CREATE TABLE `board_mgr` (
 	`bmno`        INT(11)     NULL     COMMENT 'bmno', -- bmno
 	`bdmanager`   VARCHAR(40) NOT NULL COMMENT 'bdmgr', -- bdmgr
 	`bdtype`      VARCHAR(40) NOT NULL COMMENT 'bdtype', -- bdtype
-	`bdm_per`     VARCHAR(40) NOT NULL COMMENT 'bdm_per', -- bdm_per
 	`create_date` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create_date', -- create_date
 	`del_chk`     VARCHAR(10) NOT NULL DEFAULT 'N' COMMENT 'del_chk' -- del_chk
 )
@@ -93,9 +84,9 @@ CREATE TABLE `reply` (
 COMMENT 'reply';
 
 -- 파일 관리 테이블
-CREATE TABLE `file_mgr` (
+CREATE TABLE `branch_file` (
 	`fmno`           INT(11)      NULL     COMMENT 'fmno', -- fmno
-	`bdno`           INT(11)      NULL     COMMENT 'bdno', -- bdno
+	`bno`           INT(11)      NULL     COMMENT 'bno', -- bno
 	`ori_file_name`  VARCHAR(260) NOT NULL COMMENT 'ori_file_name', -- ori_file_name
 	`save_file_name` VARCHAR(36)  NOT NULL COMMENT 'save_file_name', -- save_file_name
 	`fm_date_time`   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fm_date_time', -- fm_date_time
@@ -103,7 +94,7 @@ CREATE TABLE `file_mgr` (
 	`save_user_name` VARCHAR(30)  NOT NULL COMMENT 'save_user_name', -- save_user_name
 	`del_chk`        VARCHAR(10)  NOT NULL DEFAULT 'N' COMMENT 'del_chk' -- del_chk
 )
-COMMENT 'file_mgr';
+COMMENT 'branch_file';
 
 -- 메뉴 관리 테이블
 CREATE TABLE `menu_mgr` (
@@ -111,7 +102,6 @@ CREATE TABLE `menu_mgr` (
 	`adno` INT(11)     NULL COMMENT 'adno', -- adno
 	`mtype` VARCHAR(20) NULL COMMENT 'mtype', -- mtype
 	`mmgr` VARCHAR(40) NULL COMMENT 'mmgr', -- mmgr
-	`mper` VARCHAR(40) NULL COMMENT 'mper', -- mper
 	`mdate` DATETIME    NULL COMMENT 'mdate', -- mdate
 	`mudate` DATETIME    NULL COMMENT 'mudate', -- mudate
 	`del_chk` VARCHAR(10) NULL COMMENT 'del_chk' -- del_chk

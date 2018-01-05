@@ -45,6 +45,6 @@ public class FileSystem {
       count = 0;
     }
     // 파일명 재정의
-    return PREFIX + System.currentTimeMillis() + "_" + (count++);
+    return PREFIX2 + System.currentTimeMillis() + "_" + (count++);
   }
 }

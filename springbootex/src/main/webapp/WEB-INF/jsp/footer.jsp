@@ -37,6 +37,115 @@
 			});
 			console.log('bbb');
 		}
+		
+		function statusChangeCallback(response){
+			console.log('statusChangeCallback');
+			console.log(response);
+			
+			if(response.status === 'connected'){
+				testAPI();
+			}else{
+				//document.getElementById('status').innerHTML = 'Please log' + 'into this app.';
+			}
+		}
+		
+		function facebookRegist(){
+			FB.getLoginStatus(function (response){
+				if(response.status == "connected"){
+					
+					handleFacebookRegist(response);
+				}else if(response.status == "not_authorized"){
+					
+					FB.login(function (response){
+						handleFacebookRegist(response);
+					},
+					{scope: 'publish_stream, email, user_birthday'});
+				} else {
+					FB.login(function(response){
+						handleFacebookRegist(response);
+					},
+					{scope: 'publish_stream, email, user_birthday'});
+				}
+			});
+		}
+		
+		function handleFacebookRegist(response){
+			
+			var accessToken = response.authResponse.accessToken;
+			var userId, userName, fbId, userBirth;
+			
+			FB.api('/me', function(user){
+				userId = user.email;
+				userName = user.name;
+				fbId = user.id;
+				userBirth=user.birthday;
+				
+				alert(userId);
+				alert(userName);
+				alert(userBirth);
+				
+				$('input[name=fbAceessToken]').val(accessToken);
+				return;
+				
+				$.ajax({
+					type: "post",
+					url: "https://localhost:8080/auth/form",
+					dataType: "jsonp",
+					json: "callback",
+					data:{
+						userId: userId
+					},
+					beforeSend: function(){
+						$('#ajax_load_indicator').fadeIn('fast');
+						
+					},
+					success: function(data){
+						if(data.result == true){
+							alert("이미 가입이 되어있습니다.");
+							return;
+						}else{
+							if(confirm("Facebook 계정으로 가입하시겠습니까?\n\nFacebook 계정으로 가입시 추가정보를 입력하셔야 합니다.")){
+								
+								var $form = $("<form></form>");
+								$form.attr("action","페이스북에서 받은 정보를 post로 넘길 url");
+								$form.attr("method", "post");
+								$form.appendTo("body");
+								//$form.append("<input type ="hidden" name="userName" value=""+userName +"">");
+								$form.append("");
+								$form.append("");
+								$form.append("");
+								$form.submit();
+								
+							}
+							return;
+						}
+					},
+					error: function(data, status, err){
+						alert("서버와의 통시이 실패했습니다.");
+						return;
+					},
+					complete: function(){
+						$('ajax_load_indicator').fadeOut();
+					}
+				
+				});
+			});
+		}
+		
+		
+		function testAPI(){
+			console.log('========================> WELLCOME');
+			FB.api('/me', function(response){
+				console.log('Successful login for : '+ response.name);
+				//document.getElementById('status').innerHTML='Thanks for logging in, '+ response.name + '!';
+			});
+		}
+		
+		function checkLoginState(){
+			FB.getLoginStatus(function(response){
+				statusChangeCallback(response);
+			});
+		}
 
 		window.fbAsyncInit = function() {
 			//SDK loaded, initialize it
@@ -50,6 +159,7 @@
 
 			//check user session and refresh it
 			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response)
 				if (response.status === 'connected') {
 					//user is authorized
 					//document.getElementById('loginBtn').style.display = 'none';

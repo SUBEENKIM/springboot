@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import practice.domain.Branch;
+import practice.domain.Upload;
 import practice.service.BranchService;
-import practice.service.FileUploadService;
+import practice.service.UploadService;
+import practice.utils.FileSystem;
 
 @Controller
 @RequestMapping("/branch")
@@ -25,47 +27,64 @@ public class BranchControl {
 	@Autowired
 	ServletContext servletContext;
 	@Autowired
-	FileUploadService fileUploadService;
+	UploadService uploadService;
 
-	@RequestMapping("list2")
+	@RequestMapping("list")
 	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize,
 			Model model) throws Exception {
 
 		List<Branch> list = branchService.list(pageNo, pageSize);
 		model.addAttribute("list", list);
 
-		return "branch/list2";
+		return "branch/list";
 	}
+	
+	
 
 	@RequestMapping("add")
 	public String add(Branch branch, MultipartFile[] photo) throws Exception {
-		ArrayList<String> photoList = new ArrayList<>();
+		FileSystem fileSystem = new FileSystem();
+		Upload upload = new Upload();
+		System.out.println(photo);
+
+		ArrayList<Upload> uploadList = new ArrayList<>();
 		for (MultipartFile fileItem : photo) {
-			String filename = fileUploadService.save(fileItem);
-			if (filename == null)
-				continue;
-			photoList.add(filename);
+			if (fileItem != null) {
+				String fileName = fileItem.getOriginalFilename();
+				String newFileName = fileSystem.newFileName();
+				upload.setFileName(fileName);
+				upload.setNewFileName(newFileName);
+				uploadService.fileUpload(fileItem, newFileName);
+				uploadList.add(upload);
+			}
 		}
-		branch.setPhotoList(photoList);
+		branch.setUploadList(uploadList);
 		branchService.add(branch);
-		return "redirect:list2.do";
+		
+		
+		return "redirect:list";
 	}
 
 	@RequestMapping("update")
-	  public String update(
-	      Branch branch, 
-	      MultipartFile[] photo) throws Exception {
-	    ArrayList<String> photoList = new ArrayList<>();
-	    for (MultipartFile fileItem : photo) {
-	      String filename = fileUploadService.save(fileItem);
-	      if (filename == null) continue;
-	      photoList.add(filename);
-	    }
-	    branch.setPhotoList(photoList); // 업로드 한 사진 파일명을 저장한다.
-	    
-	    branchService.update(branch);
-	    return "redirect:list.do";
-	  }
+	public String update(Branch branch, MultipartFile[] photo) throws Exception {
+		FileSystem fileSystem = new FileSystem();
+		Upload upload = new Upload();
+
+		ArrayList<Upload> uploadList = new ArrayList<>();
+		for (MultipartFile fileItem : photo) {
+			if (fileItem != null) {
+				String fileName = fileItem.getOriginalFilename();
+				String newFileName = fileSystem.newFileName();
+				upload.setFileName(fileName);
+				upload.setNewFileName(newFileName);
+				uploadService.fileUpload(fileItem, newFileName);
+				uploadList.add(upload);
+			}
+		}
+		branch.setUploadList(uploadList);
+		branchService.update(branch);
+		return "redirect:list";
+	}
 
 	@RequestMapping("detail")
 	public String detail(int no, Model model) throws Exception {
@@ -75,14 +94,13 @@ public class BranchControl {
 		}
 		model.addAttribute("branch", branch);
 		return "branch/detail";
-		
+
 	}
-	
-	
-	  @RequestMapping("delete")
-	  public String delete(int no) throws Exception {
-	    branchService.remove(no);
-	    return "redirect:list.do";
-	  }  
+
+	@RequestMapping("delete")
+	public String delete(int no) throws Exception {
+		branchService.remove(no);
+		return "redirect:list";
+	}
 
 }

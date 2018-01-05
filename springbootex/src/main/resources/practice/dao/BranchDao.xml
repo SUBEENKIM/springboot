@@ -11,33 +11,32 @@
     <result column="btel" property="tel"/>
     <result column="bintro" property="intro"/>
     <result column="barea" property="area"/>
-    <result column="blilg" property="lilg"/>
     <result column="bmno" property="bmno"/>
     <result column="bmname" property="bmname"/>
-    <collection property="photoList" ofType="string">
-      <result column="path"/>
+    <collection property="uploadList" ofType="string">
+      <result column="save_file_name"/>
     </collection>
   </resultMap>
 
   <select id="selectList" resultMap="branchMap" parameterType="map">
-    select  b.bno, b.bname, b.btel, bm.bmno, bm.bmname, null as path
+    select  b.bno, b.bname, b.btel, bm.bmno, bm.bmname, null as save_file_name
     from branch b left join branch_master bm
     on b.bmno=bm.bmno
     limit #{startIndex}, #{pageSize}
   </select>
   
   <select id="selectOne" resultMap="branchMap" parameterType="int">
-    select  b.bno, b.bname, b.btel, b.baddr, b.bintro, b.barea, b.blilg, bm.bmno, bm.bmname, bp.path
+    select  b.bno, b.bname, b.btel, b.baddr, b.bintro, b.barea, bm.bmno, bm.bmname, bf.save_file_name
     from branch b left join branch_master bm on b.bmno=bm.bmno 
-    			  left outer join branch_phot bp on b.bno=bp.bno
+    			  left outer join branch_file bf on b.bno=bf.bno
     
     where b.bno = #{branchNo}
   </select>
   
   
   <insert id="insert" parameterType="branch" useGeneratedKeys="true" keyColumn="bno" keyProperty="no">
-    insert into branch(bname, btel, baddr, barea, blilg, bmno, bintro) 
-    values(#{name}, #{tel}, #{addr}, #{area}, #{lilg}, #{bmno}, #{intro})
+    insert into branch(bname, btel, baddr, barea, bmno, bintro) 
+    values(#{name}, #{tel}, #{addr}, #{area}, #{bmno}, #{intro})
   </insert>
   
   <delete id="delete" parameterType="int">
@@ -49,26 +48,26 @@
       bname=#{name}, 
       btel=#{tel},
       baddr=#{addr},
-      blilg=#{lilg},
       bintro=#{intro},
       barea=#{area}
     where bno=#{no}
   </update>
   
+  <!--  
   <insert id="insertPhoto" parameterType="map">
-    insert into branch_phot(bno,path)
+    insert into file_mgr(bno,path)
     values(#{branchNo},#{photoPath})
   </insert>
   
   <select id="selectPhotoList" parameterType="int">
-    select bpno, bno, path
-    from branch_phot
+    select fmno, bno, save_file_name
+    from file_mgr
     where bno=#{branchNo}
   </select>
   
   <delete id="deletePhoto" parameterType="int">
-    delete from branch_phot
+    delete from file_mgr
     where bno=#{branchNo}
   </delete>
-
+-->
 </mapper>
