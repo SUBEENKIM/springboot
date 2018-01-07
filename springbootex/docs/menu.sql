@@ -1,13 +1,10 @@
-create database if not exists digitalmenudb default character set utf8 collate utf8_general_ci;
 create database if not exists big3 default character set utf8 collate utf8_general_ci;
 
-create user 'menu'@'localhost' identified by '1111';
 create user 'big3'@'localhost' identified by '1111';
 
-grant all privileges on digitalmenudb.* to 'menu'@'localhost';
 grant all privileges on big3.* to 'big3'@'localhost';
 
-use digitalmenudb;
+use big3;
 
 -- BranchMaster
 create table branch_master(

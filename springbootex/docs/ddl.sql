@@ -1,3 +1,11 @@
+create database if not exists big3 default character set utf8 collate utf8_general_ci;
+
+create user 'big3'@'localhost' identified by '1111';
+
+grant all privileges on big3.* to 'big3'@'localhost';
+
+use big3;
+
 DROP TABLE IF EXISTS auth_mgr;
 DROP TABLE IF EXISTS admin;
 DROP TABLE IF EXISTS branch_master;
