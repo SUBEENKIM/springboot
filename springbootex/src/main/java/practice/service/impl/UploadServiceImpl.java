@@ -33,7 +33,7 @@ public class UploadServiceImpl implements UploadService {
 	private final static String PATH4 = "/upload/user";
 	private final static String PATH5 = "/upload/docs";
 	private final static String PATH6 = "/upload/iot";
-	private final static String DIR = "webupload/";
+	private final static String DIR = "";
 
 	@Override
 	public String fileUpload(MultipartFile file, String newFileName/* , HttpSession session */) throws Exception {

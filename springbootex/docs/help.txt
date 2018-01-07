@@ -1,0 +1,4 @@
+로컬/서버 전환시 바꿔줘야할것.
+
+1. application properties 에서 서버 port와 key 바꾸기
+2. UploadServiceImpl 에서 DIR 경로 c:/ 경로바꿔주기
