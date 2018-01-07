@@ -38,14 +38,11 @@ public class BranchControl {
 
 		return "branch/list";
 	}
-	
-	
 
 	@RequestMapping("add")
 	public String add(Branch branch, MultipartFile[] photo) throws Exception {
 		FileSystem fileSystem = new FileSystem();
 		Upload upload = new Upload();
-		System.out.println(photo);
 
 		ArrayList<Upload> uploadList = new ArrayList<>();
 		for (MultipartFile fileItem : photo) {
@@ -60,8 +57,7 @@ public class BranchControl {
 		}
 		branch.setUploadList(uploadList);
 		branchService.add(branch);
-		
-		
+
 		return "redirect:list";
 	}
 

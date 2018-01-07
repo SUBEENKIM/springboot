@@ -123,5 +123,27 @@ CREATE TABLE `menu` (
 )
 COMMENT 'menu';
 
+-- 이벤트 테이블
+CREATE TABLE event (
+   evno       INT(11)       NULL     ,
+   tpno       INT(11)       NULL     ,
+   evtype     VARCHAR(40)    NOT NULL,
+   evtitle    VARCHAR(40)   NOT NULL ,
+   evinfo     VARCHAR(40)   NOT NULL ,
+   evcontent  VARCHAR(40)   NOT NULL ,
+   evcontent2 VARCHAR(40)   NOT NULL,
+   evsdate    DATETIME(40)   NOT NULL DEFAULT NOW() ,
+   evedate    DATETIME(200) NOT NULL,
+   delchk     VARCHAR(40)   NOT NULL DEFAULT 'N',
+   evimg      VARCHAR(40) NULL
+);
 
-
+-- 템플릿 테이블
+CREATE TABLE template (
+   tpno      INT(11)       NULL     ,
+   tptitle   VARCHAR(40)   NOT NULL ,
+   tpinfo    VARCHAR(40)   NOT NULL ,
+   tpdate    VARCHAR(40)   NOT NULL DEFAULT NOW(),
+   delchk    VARCHAR(40)   NOT NULL DEFAULT 'N'  ,
+   tpimg     VARCHAR(40)  
+);

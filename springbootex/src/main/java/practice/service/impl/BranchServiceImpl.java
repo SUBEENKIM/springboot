@@ -13,7 +13,7 @@ import practice.domain.Upload;
 import practice.service.BranchService; 
 
 @Service
-class BranchServiceImpl implements BranchService{
+public class BranchServiceImpl implements BranchService{
 
 	@Autowired
 	BranchDao branchDao;

@@ -19,11 +19,9 @@
 
 			<li><a href="index.html">메인</a></li>
 			<li><a href='mypage.do?no=${loginBranchMaster.no}'>마이페이지</a></li>
-			<li><a href="#">매장환경관리</a></li>
-			<li><a href="#">매장메뉴관리</a></li>
+			<li><a href="#">매장관리</a></li>
 			<li><a href="#">빅데이터</a></li>
 			<li><a href="#">게시판</a></li>
-			<li><a href="#">Admin Only</a></li>
 		</ul>
 	</nav>
 </div>
