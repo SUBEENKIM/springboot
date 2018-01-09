@@ -43,6 +43,40 @@
 			margin: 80px auto;
 		}
 	</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>
+$(document).ready(function()
+{
+    $.ajax(
+            {
+                url: '//connect.facebook.net/ko_KR/sdk.js',
+                dataType: 'script',
+                cache: true,
+                success:function(script, textStatus, jqXHR)
+                {
+                    FB.init(
+                        {
+                            appId      : '1642835115777308',
+                            xfbml      : true,
+                            version    : 'v2.8'
+                        }
+                    );
+                     
+                    $('#loginbutton,#feedbutton').removeAttr('disabled');
+                    FB.getLoginStatus(function(response) {
+        				statusChangeCallback(response)
+        				if (response.status === 'connected') {
+        					//user is authorized
+        					//document.getElementById('loginBtn').style.display = 'none';
+        					getUserData();
+        				} else {
+        					//user is not authorized
+        				}
+        			});
+                }
+            });
+});
+</script>	
 </head>
 <body class="subpage">
 
@@ -142,10 +176,6 @@
 	<jsp:include page="../footer.jsp"></jsp:include>
 
 	<!-- Scripts -->
-	<script
-		src="${pageContext.servletContext.contextPath}/assets/js/jquery-1.10.2.min.js"></script>
-	<script
-		src="${pageContext.servletContext.contextPath}/assets/js/jquery.min.js"></script>
 	<script
 		src="${pageContext.servletContext.contextPath}/assets/js/bootstrap.min.js"></script>
 	<script

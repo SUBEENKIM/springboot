@@ -1,5 +1,8 @@
 package practice.web;
 
+import java.util.Enumeration;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +35,7 @@ public class AuthControl {
 	}
 
 	@RequestMapping("login")
-	public String login(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public String login(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception {
 		String userType = req.getParameter("userType");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
@@ -43,7 +46,6 @@ public class AuthControl {
 		}
 
 		if (branchMaster != null) { // 현재 상태 : 아이디는 저장되지만 로그인할때마다 기억하기 체크박스 눌러줘야 다음 로그인때 저장됨.
-			HttpSession session = req.getSession();
 			session.setAttribute("loginBranchMaster", branchMaster);
 			String saveEmail = req.getParameter("saveEmail");
 			if (saveEmail != null) {
@@ -62,22 +64,30 @@ public class AuthControl {
 			return "auth/fail";
 		}
 	}
-
+	
+	@RequestMapping("facebooklogin")
+	public String facebooklogin(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception {
+		Enumeration<String> paramNames = req.getParameterNames();
+		while (paramNames.hasMoreElements()) {
+			String name = paramNames.nextElement();
+			System.out.printf("%s=%s\n", name, req.getParameter(name));
+		}
+		System.out.println("-------------------------");
+		
+		return "redirect:../auth/index";
+	}
+	
 	@RequestMapping("logout")
-	public String logout(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String logout(HttpServletRequest req) throws Exception {
 		req.getSession().invalidate();
 		return "redirect:../auth/form";
 	}
 
 	@RequestMapping("mypage")
-	public String mypage(int no, Model model) throws Exception {
-		BranchMaster branchMaster = branchMasterService.get(no);
-		Branch branch = branchService.get(no);
-		if (branchMaster == null) {
-			throw new Exception(no + "번 회원이 없습니다.");
-		}
-		model.addAttribute("branchMaster", branchMaster);
-		model.addAttribute("branch", branch);
+	public String mypage(HttpSession session, Model model) throws Exception {
+		BranchMaster branchMaster = (BranchMaster) session.getAttribute("loginBranchMaster");
+		List<Branch> branchList = branchService.listByBranchNo(branchMaster.getNo());
+		model.addAttribute("branchList", branchList);
 		return "auth/mypage";
 
 	}
@@ -97,7 +107,7 @@ public class AuthControl {
 	public String update(BranchMaster branchMaster) throws Exception {
 
 		branchMasterService.update(branchMaster);
-		return "/auth/mypage";
+		return "redirect:../auth/index";
 	}
 
 }

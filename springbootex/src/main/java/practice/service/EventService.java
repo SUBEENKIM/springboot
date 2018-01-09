@@ -1,10 +1,13 @@
 package practice.service;
 
-import practice.domain.Event;
+import java.util.List;
+
+import practice.domain.Branch;
+import practice.domain.Template;
 
 public interface EventService {
 	 
-	  void add(Event event) throws Exception;
+	List<Template> listByTemplate(List<Branch> branch) throws Exception;
 	  
 
 }

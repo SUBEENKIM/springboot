@@ -27,13 +27,22 @@
 			    console.log(response);
 			}); */
 			FB.api('/me', {
-				fields : 'name,email,gender'
+				fields : 'name,email,gender,id'
 			}, function(response) {
 				console.log(JSON.stringify(response));
 				$("#name").text("이름 : " + response.name);
 				$("#email").text("이메일 : " + response.email);
 				$("#gender").text("성별 : " + response.gender);
 				console.log('aaa');
+				
+				$.post("/auth/facebooklogin", {
+					name: response.name,
+					email: response.email,
+					gender: response.gender,
+					id: response.id
+				}, function(responseText) {
+					console.log(responseText);
+				})
 			});
 			console.log('bbb');
 		}
@@ -158,6 +167,7 @@
 			});
 
 			//check user session and refresh it
+			/*
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response)
 				if (response.status === 'connected') {
@@ -168,9 +178,11 @@
 					//user is not authorized
 				}
 			});
+			*/
 		};
 
 		//load the JavaScript SDK
+		/*
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) {
@@ -181,7 +193,7 @@
 			js.src = "//connect.facebook.com/ko_KR/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-
+		*/
 		//add event listener to login button
 		document.getElementById('loginBtn').addEventListener('click',
 				function() {

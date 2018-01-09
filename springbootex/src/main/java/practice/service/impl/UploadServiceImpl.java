@@ -33,7 +33,7 @@ public class UploadServiceImpl implements UploadService {
 	private final static String PATH4 = "/upload/user";
 	private final static String PATH5 = "/upload/docs";
 	private final static String PATH6 = "/upload/iot";
-	private final static String DIR = "";
+	private final static String DIR = "c:/webupload/";
 
 	@Override
 	public String fileUpload(MultipartFile file, String newFileName/* , HttpSession session */) throws Exception {
@@ -45,15 +45,15 @@ public class UploadServiceImpl implements UploadService {
 		// String realPath = session.getServletContext().getRealPath(PATH3);
 		String fileName = file.getOriginalFilename();
 		String type = fileSystem.fileFormat(fileName);
-		File filePath = new File(newFileName);
+		File filePath = new File(DIR + newFileName);
 		// 파일의 경로로 파일 날려줌
 		file.transferTo(filePath);
 		if (FileSystem.getMediaType(type) != null) {
-			BufferedImage sourceImg = ImageIO.read(new File(newFileName));
+			BufferedImage sourceImg = ImageIO.read(new File(DIR + newFileName));
 			BufferedImage thumbImg = new BufferedImage(300, 300, BufferedImage.TYPE_3BYTE_BGR);
 			Graphics2D graphic = thumbImg.createGraphics();
 			graphic.drawImage(sourceImg, 0, 0, 300, 300, null);
-			String thumbName = fileSystem.thumbName() + "." + type;
+			String thumbName = DIR + fileSystem.thumbName() + "." + type;
 			File thumbNail = new File(thumbName);
 			ImageIO.write(thumbImg, type.toUpperCase(), thumbNail);
 			return thumbName;
@@ -81,6 +81,6 @@ public class UploadServiceImpl implements UploadService {
 
 	@Override
 	public Resource fileDownload(String fileName) {
-		return new FileSystemResource(fileName);
+		return new FileSystemResource(DIR + fileName);
 	}
 }

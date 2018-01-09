@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import practice.dao.BranchDao;
+import practice.dao.BranchMasterDao;
 import practice.dao.FileDao;
 import practice.domain.Branch;
 import practice.domain.Upload;
@@ -17,6 +18,10 @@ public class BranchServiceImpl implements BranchService{
 
 	@Autowired
 	BranchDao branchDao;
+	
+	@Autowired
+	BranchMasterDao branchMasterDao;
+	
 	@Autowired
 	FileDao fileDao;
 	
@@ -26,6 +31,11 @@ public class BranchServiceImpl implements BranchService{
 		valueMap.put("pageSize", pageSize);
 		
 		return branchDao.selectList(valueMap);
+		  
+	}
+	
+	public List<Branch> listByBranchNo(int no) throws Exception{
+		return branchDao.selectListByBranchNo(no);
 		  
 	}
 	  

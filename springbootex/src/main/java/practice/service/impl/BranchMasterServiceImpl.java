@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import practice.dao.BranchMasterDao;
+import practice.domain.Branch;
 import practice.domain.BranchMaster;
 import practice.service.BranchMasterService;
 
@@ -24,11 +25,12 @@ public class BranchMasterServiceImpl implements BranchMasterService{
 		return branchMasterDao.selectList(valueMap);
 		  
 	}
+	
 	  
-	public BranchMaster get(int no) throws Exception{
-		return branchMasterDao.selectOne(no);
-		  
-	}
+//	public BranchMaster get(int no) throws Exception{
+//		return branchMasterDao.selectOne(no);
+//		  
+//	}
 	  
 	public BranchMaster getByEmailPassword(String email, String password) throws Exception{
 		HashMap<String,Object> valueMap = new HashMap<>();

@@ -44,16 +44,16 @@ public class BranchMasterControl {
 		}
 	}
 	
-	@RequestMapping("detail")
-	public Object detail(int no) throws Exception{
-		try {
-			BranchMaster branchMaster = branchMasterService.get(no);
-			
-			return new JsonResult(STATE_SUCCESS, branchMaster);
-		}catch (Exception e) {
-			return new JsonResult(STATE_FAIL, e.getMessage());
-		}
-	}
+//	@RequestMapping("detail")
+//	public Object detail(int no) throws Exception{
+//		try {
+//			BranchMaster branchMaster = branchMasterService.get(no);
+//			
+//			return new JsonResult(STATE_SUCCESS, branchMaster);
+//		}catch (Exception e) {
+//			return new JsonResult(STATE_FAIL, e.getMessage());
+//		}
+//	}
 	
 	@RequestMapping("list")
 	public Object list(
